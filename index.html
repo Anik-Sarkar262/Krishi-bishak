@@ -17,6 +17,9 @@
         <div class="brand-section">
             <div class="overlay">
                 <div class="content">
+                    <div class="left-panel">
+            <img src="logo.jpeg" alt="Krishi Bhishak Logo" class="logo-left">
+        </div>
                     <h1>Krishi-Bhishak</h1>
                     <p class="tagline">Crop Disease Detector for Small Farmers</p>
                     <p class="description">Empowering agriculture with AI. Detect crop diseases early and secure your harvest.</p>
@@ -30,9 +33,9 @@
                 
                 <!-- START: Added Logo Here -->
         <!-- Replace 'assets/logo.png' with your actual file name or a URL -->
-         <div class="logo-wrapper">
-            <img src="logo.jpeg" alt="Krishi Bhishak Logo" class="app-logo">
-        </div>
+         <!-- <div class="left-panel">
+            <img src="logo.jpeg" alt="Krishi Bhishak Logo" class="logo-left">
+        </div> -->
         
         <!-- END: Added Logo Here -->
 
@@ -62,14 +65,14 @@
         <a href="#">Forgot Password?</a>
     </div>
 
-    <button type="submit" class="btn-login" onclick="window.location.href='analyser.html'">Login</button>
-    
+    <button type="submit" class="btn-login" href="dashboard.html">Login</button>
+
     <div class="divider">
         <span>OR</span>
     </div>
 
     <!-- Added onclick event to Google button too -->
-    <button type="button" class="btn-google" onclick="window.location.href='analyzer.html'">
+    <button type="button" class="btn-google" onclick="window.location.href='dashboard.html'">
         <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google"> Continue with Google
     </button>
 
@@ -99,7 +102,7 @@
 
         setTimeout(() => {
             // 3. Redirect to your analyzer page
-            window.location.href = 'analyzer.html';
+            window.location.href = 'dashboard.html';
         }, 800); // 800ms delay looks professional
     });
 </script>

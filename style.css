@@ -13,6 +13,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f0fdf4; /* Very light green background */
+    background-image: url('https://t3.ftcdn.net/jpg/16/22/19/32/360_F_1622193230_nYiBJUsOuSITdt7M5ebUEWOjXwj5Kp2A.jpg');
 }
 
 .container {
@@ -83,6 +84,45 @@ body {
     max-width: 320px;
     text-align: center;
 }
+.left-panel {
+    width: 0;
+    background: linear-gradient(135deg, #2e8b57, #3cb371);
+    padding: 0px 0px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Logo styling */
+.logo-left {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    object-position: center;
+}
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+.logo-left {
+    animation: float 3s ease-in-out infinite;
+}
+
+
+/* Heading spacing */
+.left-panel h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
 /* Logo Wrapper */
 .logo-wrapper {
     width: 90px;
