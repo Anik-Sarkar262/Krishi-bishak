@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi-Bhishak - Crop Disease Detector</title>
+    <link rel="stylesheet" href="weather.css">
+
+     <!-- Navbar -->
+     <nav 
+        <button class="btn-logout" onclick="window.location.href='index.html'">Logout</button>
+    </nav>
+   
+</head>
+<body>
+<script src="weather.js"></script>
+<!-- Sidebar -->
+<nav class="sidebar" id="sidebar">
+    <div class="logo">
+        
+        Krishi-Bhishak
+    </div>
+    <div style="flex:1">
+        <a class="nav-link active" onclick="showView('weather')">
+            <svg viewBox="0 0 24 24"><path d="M3,13H11V3H3V13M3,21H11V15H3V21M13,21H21V11H13V21M13,3V9H21V3H13Z"/></svg> Weather
+        </a>
+        <a class="nav-link" onclick="window.location.href='analyser.html'">
+            <svg viewBox="0 0 24 24" ><path d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7Z"/></svg> Upload Image
+        </a>
+         <!-- <a class="nav-link" onclick="showView('community')">
+            <svg viewBox="0 0 24 24"><path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,6.33 8.28,5 12,5C15.72,5 18.44,6.33 19,8V12.5C19,14.25 16.31,15.77 12.75,15.98L12,17.5L11.25,15.98C7.69,15.77 5,14.25 5,12.5V8M12,3.5A5.5,5.5 0 0,0 6.5,9A
+        </a> -->
+        <a class="nav-link" onclick="showView('tasks')">
+            <svg viewBox="0 0 24 24"><path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M17,11H7V9H17V11M17,15H7V13H17V15Z"/></svg> Treatment Tracker
+        </a>
+        <a class="nav-link" onclick="showView('settings')">
+            <svg viewBox="0 0 24 24"><path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z"/></svg> Alerts & SMS
+        </a> 
+    </div>
+   
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+    <header>
+        <div style="display:flex; align-items:center; gap:1rem;">
+            <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('active')">☰</button>
+            <h1 id="page-title">Weather Report</h1>
+        </div>
+        <div style="font-size:0.9rem; color:var(--text-light);" id="current-date"></div>
+    </header>
+
+    <!-- DASHBOARD VIEW -->
+    <section id="dashboard-view">
+        <!-- weather Alert Widget -->
+        
+        <div class="weather-card" style="padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+            <h4>Local meteorological forecast</h4>
+            <input type="text" id="cityInput" placeholder="Enter City (e.g. Mumbai)" class="form-control mb-2">
+            <button id="getWeatherBtn" class="btn btn-primary">Check Weather</button>
+            
+            <div id="weatherDisplay" style="margin-top: 20px; display: none;">
+                <h4 id="cityName">---</h4>
+                <img id="weatherIcon" src="" alt="Weather Icon">
+                <p><strong>Temperature:</strong> <span id="temp">--</span>°C</p>
+                <p><strong>Humidity:</strong> <span id="humidity">--</span>%</p>
+                <p><strong>Condition:</strong> <span id="description">--</span></p>
+            </div>
+        </div>
+        <div class="dashboard-grid">
+            <br>
+     
+            
+
+                    <div class="dashboard-grid">
+                        <div class="card" id="pollution-container" style="text-align: center; padding: 20px;">
+                            <h3>Air Quality Index (AQI)</h3>
+                            <h1 id="aqi-num" style="font-size: 60px; margin: 10px 0;">--</h1>
+                            <p id="aqi-desc" style="font-weight: bold; padding: 5px 10px; border-radius: 5px; display: inline-block;">Enter a city to start</p>
+                            <iframe 
+                            src="https://www.aqi.in/dashboard/widget/compact/your-city-id" 
+                            style="width: 100%; height: 150px; border: none;">
+                          </iframe>
+                        </div>
+       
+    </section>
+
+   
+
+    <!-- COMMUNITY VIEW -->
+    <section id="community-view" class="hidden">
+        <div class="card">
+            <h3>Community Validation <span style="font-size:0.8rem; font-weight:400;">Help fellow farmers verify AI results.</span></h3>
+            <div id="community-feed"> 
+                <!-- Mock posts -->
+            </div>
+        </div>
+    </section>
+
+    <!-- TASKS/TRACKER VIEW -->
+    <section id="tasks-view" class="hidden">
+        <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Treatment Tracker</h3>
+                <button class="btn-primary" onclick="addManualTask()">+ Add Manual Task</button>
+            </div>
+            <div id="task-list" style="margin-top:1rem;">
+                <!-- Tasks injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SETTINGS/ALERTS VIEW -->
+    <section id="settings-view" class="hidden">
+        <div class="card">
+            <h3>SMS & Alert Integration</h3>
+            <p style="color:#666; font-size:0.9rem; margin-bottom:1rem;">Receive instant SMS when high-risk diseases are detected or prevention alerts trigger.</p>
+            
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <div>
+                    <strong>Enable SMS Alerts</strong>
+                    <div style="font-size:0.8rem; color:#888;">Send alerts to mobile number</div>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="sms-toggle" onchange="toggleSMS()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="sms-input-group">
+                <input type="tel" id="phone-number" class="sms-input" placeholder="+1 (555) 000-0000" value="+1 555 012 3456">
+                <button class="btn-primary" onclick="savePhone()">Update</button>
+            </div>
+
+            <div style="margin-top:2rem;">
+                <h4>Alert History</h4>
+                <ul id="alert-log" style="list-style:none; margin-top:0.5rem; font-size:0.9rem; color:#555;">
+                    <li style="padding:0.5rem 0; border-bottom:1px solid #eee;">Oct 24 - SMS Sent: High humidity warning.</li>
+                    <li style="padding:0.5rem 0; border-bottom:1px solid #eee;">Oct 22 - In-App: Rust detected in North sector.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Result Modal -->
+<div id="result-modal" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:none; justify-content:center; align-items:center; z-index:100;">
+    <div style="background:white; width:90%; max-width:500px; padding:2rem; border-radius:12px; position:relative;">
+        <button onclick="closeModal()" style="position:absolute; top:1rem; right:1rem; border:none; background:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+        
+        <h2 id="modal-title" style="color:var(--danger); margin-bottom:0.5rem;">Late Blight</h2>
+        <div style="margin-bottom:1rem; color:#666;">
+            Confidence: <span id="modal-conf" style="font-weight:700; color:var(--primary);">94%</span>
+        </div>
+        
+        <p id="modal-desc" style="line-height:1.6; color:#333; margin-bottom:1.5rem;">
+            Fungal infection detected. Action required immediately.
+        </p>
+
+        <div style="background:#f9f9f9; padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
+            <strong>Treatment:</strong> <span id="modal-treat">Apply fungicide. Remove infected leaves.</span>
+        </div>
+
+        <!-- New Feature Actions -->
+        <div class="modal-actions">
+            <button class="btn-primary" onclick="addToTrackerFromModal()">Track Treatment</button>
+            <!-- <button class="btn-outline" onclick="askCommunity()">Ask Community</button> -->
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast toast-success">
+    <svg style="width:20px; height:20px; fill:#4caf50" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,17L5,12L6.41,10.59L10,14.17L17.59,6.58L19,8L10,17Z"/></svg>
+    <span id="toast-msg">Success</span>
+</div>
+
+<
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="weather.css">
+</head>
+<!-- </script> -->
+<script src="weather.js"></script>
+</body>
+</html>
