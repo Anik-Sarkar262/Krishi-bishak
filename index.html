@@ -1,110 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | Krishi-Bhishak</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Importing a nice font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
     <div class="container">
-        <!-- Left Side: Informational/Brand -->
-        <div class="brand-section">
-            <div class="overlay">
-                <div class="content">
-                    <div class="left-panel">
-            <img src="logo.jpeg" alt="Krishi Bhishak Logo" class="logo-left">
-        </div>
-                    <h1>Krishi-Bhishak</h1>
-                    <p class="tagline">Crop Disease Detector for Small Farmers</p>
-                    <p class="description">Empowering agriculture with AI. Detect crop diseases early and secure your harvest.</p>
-                </div>
+      <div class="brand-section">
+        <div class="overlay">
+          <div class="content">
+            <div class="left-panel">
+              <img
+                src="logo.jpeg"
+                alt="Krishi Bhishak Logo"
+                class="logo-left"
+              />
             </div>
+            <h1>Krishi-Bhishak</h1>
+            <p class="tagline">Crop Disease Detector for Small Farmers</p>
+            <p class="description">
+              Empowering agriculture with AI. Detect crop diseases early and
+              secure your harvest.
+            </p>
+          </div>
         </div>
+      </div>
 
-        <!-- Right Side: Login Form -->
-        <div class="login-section">
-            <div class="login-box">
-                
-                <!-- START: Added Logo Here -->
-        <!-- Replace 'assets/logo.png' with your actual file name or a URL -->
-         <!-- <div class="left-panel">
-            <img src="logo.jpeg" alt="Krishi Bhishak Logo" class="logo-left">
-        </div> -->
-        
-        <!-- END: Added Logo Here -->
+      <div class="login-section">
+        <div class="login-box">
+          <h2>Welcome Farmers</h2>
+          <p>Please login to access your dashboard</p>
 
-                <h2>Welcome Farmers</h2>
-                <p>Please login to access your dashboard</p>
+          <form id="loginForm">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
 
-                <!-- Replace your existing <form action="#"> block with this code:
-    Added id="loginForm" to the form tag -->
-
-    <form id="loginForm">
-    <div class="input-group">
-        <i class="fas fa-user"></i>
-        <!-- Added value="..." so it looks like a real user is typing -->
-        <input type="text" placeholder="Mobile Number or Email" value="farmer@krishi.com" required>
-    </div>
-    
-    <div class="input-group">
-        <i class="fas fa-lock"></i>
-        <!-- Added value="..." for dummy password -->
-        <input type="password" placeholder="Password" value="123456" required>
-    </div>
-
-    <div class="options">
-        <label>
-            <input type="checkbox" checked> Remember Me
-        </label>
-        <a href="#">Forgot Password?</a>
-    </div>
-
-    <button type="submit" class="btn-login" href="dashboard.html">Login</button>
-
-    <div class="divider">
-        <span>OR</span>
-    </div>
-
-    <!-- Added onclick event to Google button too -->
-    <button type="button" class="btn-google" onclick="window.location.href='dashboard.html'">
-        <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google"> Continue with Google
-    </button>
-
-    <p class="signup-link">New to Krishi-Bhishak? <a href="#">Register Here</a></p>
-</form>
-
+              <input
+                type="text"
+                placeholder="Mobile Number or Email"
+                value="farmer@krishi.com"
+                required
+              />
             </div>
+
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <!-- Added value="..." for a dummy password -->
+              <input
+                type="password"
+                placeholder="Password"
+                value="123456"
+                required
+              />
+            </div>
+
+            <div class="options">
+              <label> <input type="checkbox" checked /> Remember Me </label>
+              <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-login" href="dashboard.html">
+              Login
+            </button>
+
+            <div class="divider">
+              <span>OR</span>
+            </div>
+
+            <button
+              type="button"
+              class="btn-google"
+              onclick="window.location.href='dashboard.html'"
+            >
+              <img
+                src="https://img.icons8.com/color/16/000000/google-logo.png"
+                alt="Google"
+              />
+              Continue with Google
+            </button>
+
+            <p class="signup-link">
+              New to Krishi-Bhishak? <a href="#">Register Here</a>
+            </p>
+          </form>
         </div>
+      </div>
     </div>
-<!--Add this small JavaScript snippet at the very bottom of your index.html file, just before the closing </body> tag.-->
 
-<script>
-    // Get the form element
-    const loginForm = document.getElementById('loginForm');
+    <script>
+      const loginForm = document.getElementById("loginForm");
 
-    // Listen for the 'submit' event (when user clicks Login or presses Enter)
-    loginForm.addEventListener('submit', function(e) {
-        
-        // 1. Prevent the page from refreshing/reloading standard way
+      loginForm.addEventListener("submit", function (e) {
+        // Prevent the page from refreshing/reloading standard way
         e.preventDefault();
 
-        // 2. Simulate a "Loading" delay for realism (Optional: 1 second)
-        const btn = document.querySelector('.btn-login');
+        //  Simulate a "Loading" delay for realism (Optional: 1 second)
+        const btn = document.querySelector(".btn-login");
         const originalText = btn.innerText;
         btn.innerText = "Verifying...";
         btn.style.opacity = "0.7";
 
         setTimeout(() => {
-            // 3. Redirect to your analyzer page
-            window.location.href = 'dashboard.html';
-        }, 800); // 800ms delay looks professional
-    });
-</script>
-</body>
+          // Redirect to your analyzer page
+          window.location.href = "weather.html";
+        }, 800);
+      });
+    </script>
+  </body>
 </html>
