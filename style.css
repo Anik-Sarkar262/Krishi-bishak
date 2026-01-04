@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0fdf4; /* Very light green background */
+    background-color: #f0fdf4; 
     background-image: url('https://t3.ftcdn.net/jpg/16/22/19/32/360_F_1622193230_nYiBJUsOuSITdt7M5ebUEWOjXwj5Kp2A.jpg');
 }
 
@@ -30,7 +30,7 @@ body {
 .brand-section {
     flex: 1;
     position: relative;
-    /* You can replace this URL with a local image in assets/bg-farm.jpg */
+    
     background-image: url('https://images.unsplash.com/photo-1625246333195-58f21a016cde?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;
