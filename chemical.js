@@ -34,7 +34,7 @@ document.getElementById("auditBtn").addEventListener("click", async () => {
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = "AIzaSyCukOvYlOFrrc-kiOD30LdsWt0WutVhDlw";
+const API_KEY = "AIzaSyAjC0TDf2M1fNY3CNmpbouBApDDyOQHUGg";
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Helper function to convert file to base64 for Gemini
