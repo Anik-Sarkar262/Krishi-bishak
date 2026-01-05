@@ -1,48 +1,47 @@
-// --- State ---
-const state = {
-  scans: [
-    {
-      crop: "Tomato",
-      disease: "Healthy",
-      date: "2025-12-24",
-      conf: "99%",
-      type: "good",
-    },
-    {
-      crop: "Potato",
-      disease: "Early Blight",
-      date: "2025-12-22",
-      conf: "88%",
-      type: "bad",
-    },
-    {
-      crop: "Corn",
-      disease: "Healthy",
-      date: "2025-12-20",
-      conf: "96%",
-      type: "good",
-    },
-  ],
-  tasks: [
-    {
-      id: 1,
-      text: "Apply Fungicide on Potato Row A",
-      date: "2025-12-25",
-      done: false,
-      tag: "Urgent",
-    },
-    {
-      id: 2,
-      text: "Irrigate Tomato Sector 2",
-      date: "2025-12-26",
-      done: false,
-      tag: "Routine",
-    },
-  ],
+// const state = {
+//   scans: [
+//     {
+//       crop: "Tomato",
+//       disease: "Healthy",
+//       date: "2025-12-24",
+//       conf: "99%",
+//       type: "good",
+//     },
+//     {
+//       crop: "Potato",
+//       disease: "Early Blight",
+//       date: "2025-12-22",
+//       conf: "88%",
+//       type: "bad",
+//     },
+//     {
+//       crop: "Corn",
+//       disease: "Healthy",
+//       date: "2025-12-20",
+//       conf: "96%",
+//       type: "good",
+//     },
+//   ],
+//   tasks: [
+//     {
+//       id: 1,
+//       text: "Apply Fungicide on Potato Row A",
+//       date: "2025-12-25",
+//       done: false,
+//       tag: "Urgent",
+//     },
+//     {
+//       id: 2,
+//       text: "Irrigate Tomato Sector 2",
+//       date: "2025-12-26",
+//       done: false,
+//       tag: "Routine",
+//     },
+//   ],
 
-  currentScanResult: null,
-  smsEnabled: false,
-};
+//   currentScanResult: null,
+//   smsEnabled: false,
+// };
 
 // --- Navigation ---
 function showView(viewName) {
@@ -123,8 +122,8 @@ function renderTasks() {
     .join("");
 }
 
-// }
-function processUpload(input) {
+
+function processUpload(input) 
   const file = input.files[0];
   if (!file) return;
 
@@ -136,32 +135,26 @@ function processUpload(input) {
   const txt = document.getElementById("process-text");
   let width = 0;
 
-  const interval = setInterval(() => {
+  const interval = setInterval() => 
     if (width >= 100) {
       clearInterval(interval);
-      // Mock Result
-      state.currentScanResult = {
-        name: "Late Blight",
-        conf: "94%",
-        desc: "Phytophthora infestans detected. Water-soaked spots on leaves.",
-        treat: "Apply Mancozeb immediately. Remove infected tissue.",
-      };
+      
       showResultModal();
       // Reset UI
-      setTimeout(() => {
-        document.getElementById("upload-zone").classList.remove("hidden");
-        document.getElementById("processing-ui").classList.add("hidden");
-        input.value = "";
-        bar.style.width = "0%";
-      }, 500);
-    } else {
-      width += 5;
-      bar.style.width = width + "%";
-      if (width < 30) txt.textContent = "Uploading to Python Server...";
-      else if (width < 70) txt.textContent = "AI Model Analyzing (CNN)...";
-      else txt.textContent = "Comparing with database...";
-    }
-  }, 100);
+  //     setTimeout(() => {
+  //       document.getElementById("upload-zone").classList.remove("hidden");
+  //       document.getElementById("processing-ui").classList.add("hidden");
+  //       input.value = "";
+  //       bar.style.width = "0%";
+  //     }, 500);
+  //   } else {
+  //     width += 5;
+  //     bar.style.width = width + "%";
+  //     if (width < 30) txt.textContent = "Uploading to Python Server...";
+  //     else if (width < 70) txt.textContent = "AI Model Analyzing (CNN)...";
+  //     else txt.textContent = "Comparing with database...";
+  //   }
+  // }, 100);
 }
 
 // --- Modal & Actions ---
@@ -195,92 +188,91 @@ function addToTrackerFromModal() {
   closeModal();
 }
 
-function askCommunity() {
-  const post = {
-    id: Date.now(),
-    user: "You (John Doe)",
-    crop: "Unknown",
-    issue: state.currentScanResult.name,
-    votes: 0,
-    img: "https://picsum.photos/seed/new/80/80",
-  };
-  state.community.unshift(post);
-  showToast("Posted to Community for validation!");
-  closeModal();
-}
+// function askCommunity() {
+//   const post = {
+//     id: Date.now(),
+//     user: "You (John Doe)",
+//     crop: "Unknown",
+//     issue: state.currentScanResult.name,
+//     votes: 0,
+//     img: "https://picsum.photos/seed/new/80/80",
+//   };
+//   state.community.unshift(post);
+//   showToast("Posted to Community for validation!");
+//   closeModal();
+// }
 
 // --- Task Management ---
-function toggleTask(id) {
-  const task = state.tasks.find((t) => t.id === id);
-  if (task) task.done = !task.done;
-  renderTasks();
-  renderHistory(); // Update widget
-}
+// function toggleTask(id) {
+//   const task = state.tasks.find((t) => t.id === id);
+//   if (task) task.done = !task.done;
+//   renderTasks();
+//   renderHistory(); // Update widget
+// }
 
-function addManualTask() {
-  const text = prompt("Enter task description:");
-  if (text) {
-    state.tasks.unshift({
-      id: Date.now(),
-      text: text,
-      date: new Date().toISOString().split("T")[0],
-      done: false,
-      tag: "Manual",
-    });
-    renderTasks();
-  }
-}
+// function addManualTask() {
+//   const text = prompt("Enter task description:");
+//   if (text) {
+//     state.tasks.unshift({
+//       id: Date.now(),
+//       text: text,
+//       date: new Date().toISOString().split("T")[0],
+//       done: false,
+//       tag: "Manual",
+//     });
+//     renderTasks();
+//   }
+// }
 
-// --- SMS & Alerts Logic ---
-function toggleSMS() {
-  state.smsEnabled = document.getElementById("sms-toggle").checked;
-  if (state.smsEnabled) showToast("SMS Alerts Enabled");
-}
+// // --- SMS & Alerts Logic ---
+// function toggleSMS() {
+//   state.smsEnabled = document.getElementById("sms-toggle").checked;
+//   if (state.smsEnabled) showToast("SMS Alerts Enabled");
+// }
 
-function savePhone() {
-  showToast("Phone number updated!");
-}
+// function savePhone() {
+//   showToast("Phone number updated!");
+// }
 
-function vote(btn) {
-  // Visual feedback only
-  if (btn.classList.contains("active")) {
-    btn.classList.remove("active");
-  } else {
-    // Remove active from sibling
-    const parent = btn.parentElement;
-    parent
-      .querySelectorAll(".vote-btn")
-      .forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
+// function vote(btn) {
+//   // Visual feedback only
+//   if (btn.classList.contains("active")) {
+//     btn.classList.remove("active");
+//   } else {
+//     // Remove active from sibling
+//     const parent = btn.parentElement;
+//     parent
+//       .querySelectorAll(".vote-btn")
+//       .forEach((b) => b.classList.remove("active"));
+//     btn.classList.add("active");
 
-    // If it's a new scan being posted, simulate SMS notification to followers
-    if (state.smsEnabled && Math.random() > 0.5) {
-      setTimeout(
-        () => showToast("📲 SMS Sent: Neighbor posted new case"),
-        1000
-      );
-    }
-  }
-}
+//     if (state.smsEnabled && Math.random() > 0.5) {
+//       setTimeout(
+//         () => showToast("📲 SMS Sent: Neighbor posted new case"),
+//         1000
+//       );
+//     }
+//   }
+// }
 
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  const msgSpan = document.getElementById("toast-msg");
-  msgSpan.textContent = msg;
+// function showToast(msg) {
+//   const t = document.getElementById("toast");
+//   const msgSpan = document.getElementById("toast-msg");
+//   msgSpan.textContent = msg;
 
-  // Add class for SMS style if needed
-  if (msg.includes("SMS")) {
-    t.classList.remove("toast-success");
-    t.classList.add("toast-sms");
-  } else {
-    t.classList.remove("toast-sms");
-    t.classList.add("toast-success");
-  }
+  
+//   if (msg.includes("SMS")) {
+//     t.classList.remove("toast-success");
+//     t.classList.add("toast-sms");
+//   } else {
+//     t.classList.remove("toast-sms");
+//     t.classList.add("toast-success");
+//   }
 
-  t.classList.add("show");
-  setTimeout(() => t.classList.remove("show"), 3000);
-}
+//   t.classList.add("show");
+//   setTimeout(() => t.classList.remove("show"), 3000);
+// }
 
 // --- Init ---
-document.getElementById("current-date").textContent = new Date().toDateString();
-renderHistory();
+// document.getElementById("current-date").textContent = new Date().toDateString();
+// renderHistory();
