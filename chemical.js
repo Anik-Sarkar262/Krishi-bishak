@@ -1,92 +1,103 @@
-document.getElementById("auditBtn").addEventListener("click", async () => {
-  const chemical = document.getElementById("chemSearch").value;
-  const selectedLang = document.getElementById("languageSelect").value;
-  const content = document.getElementById("aiContent");
+const API_KEY = "AIzaSyAjC0TDf2M1fNY3CNmpbouBApDDyOQHUGg"; // <--- PASTE YOUR KEY HERE
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
-  // Show your loader here...
+// SELECTORS (Make sure these IDs match your HTML file!)
+const chemicalInput = document.querySelector('input[type="text"]'); // Update specific ID if you have one, e.g., document.getElementById('chemicalName')
+const fileInput = document.querySelector('input[type="file"]');     // Update specific ID, e.g., document.getElementById('imageUpload')
+const analyzeBtn = document.querySelector('button');                // The "AI Safety Analyzer" button
+const resultDiv = document.createElement('div');                    // Creating a place to show results if you don't have one
 
-  try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+// Append result div to body or a specific container
+document.body.appendChild(resultDiv); 
+resultDiv.style.marginTop = "20px";
+resultDiv.style.padding = "20px";
+resultDiv.style.whiteSpace = "pre-wrap"; // Preserves formatting
 
-    // Dynamic prompt with language instruction
-    const prompt = `
-            Analyze the chemical: ${chemical}.
-            Provide safety risks and organic replacements.
-            IMPORTANT: Write the entire response in ${selectedLang}.
-            Use simple words that a farmer can understand.
-        `;
+// MAIN FUNCTION
+analyzeBtn.addEventListener('click', async () => {
+    // 1. CLEAR PREVIOUS RESULTS & SHOW LOADING
+    resultDiv.innerHTML = "Consulting the AI Doctor...";
+    resultDiv.style.color = "blue";
+    
+    try {
+        const chemicalName = chemicalInput.value.trim();
+        const file = fileInput.files[0];
+        
+        if (!chemicalName && !file) {
+            alert("Please enter a chemical name or upload a label.");
+            return;
+        }
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
+        let contents = [];
 
-    // Standard formatting
-    let text = response.text();
-    text = text
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\n/g, "<br>");
+        // Add text instruction
+        let promptText = "You are an AI Safety Doctor. Analyze this chemical/product for safety, usage, and risks.";
+        if (chemicalName) {
+            promptText += ` The chemical name is: ${chemicalName}.`;
+        }
+        
+        // Prepare parts array for Gemini
+        const parts = [{ text: promptText }];
 
-    content.innerHTML = text;
-    document.getElementById("auditResult").style.display = "block";
-  } catch (error) {
-    console.error(error);
-  }
-});
+        // 3. HANDLE IMAGE 
+        if (file) {
+            const base64Data = await fileToGenerativePart(file);
+            parts.push(base64Data);
+        }
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+        // 4. PREPARE API BODY
+        const requestBody = {
+            contents: [{
+                parts: parts
+            }]
+        };
 
-const API_KEY = "AIzaSyAjC0TDf2M1fNY3CNmpbouBApDDyOQHUGg";
-const genAI = new GoogleGenerativeAI(API_KEY);
+        // 5. FETCH DATA
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(requestBody)
+        });
 
-// Helper function to convert file to base64 for Gemini
-async function fileToGenerativePart(file) {
-  const base64EncodedDataPromise = new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result.split(",")[1]);
-    reader.readAsDataURL(file);
-  });
-  return {
-    inlineData: { data: await base64EncodedDataPromise, mimeType: file.type },
-  };
-}
+        const data = await response.json();
 
-document.getElementById("auditBtn").addEventListener("click", async () => {
-  const textInput = document.getElementById("chemSearch").value;
-  const fileInput = document.getElementById("labelUpload").files[0];
-  const content = document.getElementById("aiContent");
-  const loader = document.getElementById("loading");
+        // 6. CHECK FOR ERRORS IN RESPONSE
+        if (!response.ok) {
+            console.error("API Error Details:", data);
+            throw new Error(data.error?.message || "Unknown API Error");
+        }
 
-  if (!textInput && !fileInput)
-    return alert("Please type a name or upload a photo!");
+        // 7. DISPLAY RESULT
+        const aiResponse = data.candidates[0].content.parts[0].text;
+        resultDiv.innerHTML = `<strong>Analysis Result:</strong><br>${aiResponse}`;
+        resultDiv.style.color = "black";
+        resultDiv.style.backgroundColor = "#f0f0f0";
 
-  loader.style.display = "block";
-
-  try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-    let result;
-
-    if (fileInput) {
-      // Case: User uploaded an image
-      const imagePart = await fileToGenerativePart(fileInput);
-      const prompt =
-        "Analyze the chemical product in this image. Identify it, assess safety, and suggest an organic replacement.";
-      result = await model.generateContent([prompt, imagePart]);
-    } else {
-      // Case: User typed a name
-      const prompt = `Analyze the chemical: ${textInput}. Provide safety risks and organic replacements.`;
-      result = await model.generateContent(prompt);
+    } catch (error) {
+        console.error("Full Error:", error);
+        alert(`AI Error: ${error.message}. Check the Console (F12) for details.`);
+        resultDiv.innerHTML = "Analysis Failed.";
+        resultDiv.style.color = "red";
     }
-
-    const response = await result.response;
-    let formattedText = response
-      .text()
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\n/g, "<br>");
-
-    content.innerHTML = formattedText;
-    document.getElementById("auditResult").style.display = "block";
-  } catch (error) {
-    alert("AI Error: Check console or API key.");
-  } finally {
-    loader.style.display = "none";
-  }
 });
+
+// HELPER: Convert File to Base64 for Gemini API
+async function fileToGenerativePart(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            // Remove the "data:image/jpeg;base64," part
+            const base64String = reader.result.split(',')[1];
+            resolve({
+                inline_data: {
+                    mime_type: file.type,
+                    data: base64String
+                }
+            });
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
