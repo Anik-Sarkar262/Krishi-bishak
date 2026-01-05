@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chemical Analyser</title>
+    <link rel="stylesheet" href="chemical.css" />
+  </head>
+  <body>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Select Language</label>
+      <select id="languageSelect" class="form-select">
+        <option value="English">English</option>
+        <option value="Hindi">हिन्दी (Hindi)</option>
+        <option value="Telugu">తెలుగు (Telugu)</option>
+        <option value="Marathi">मराठी (Marathi)</option>
+        <option value="Tamil">தமிழ் (Tamil)</option>
+        <option value="Bengali">বাংলা (Bengali)</option>
+      </select>
+    </div>
+
+    <div class="card-body">
+      <div class="mb-3">
+        <label class="form-label fw-bold">Option 1: Type Chemical Name</label>
+        <input
+          type="text"
+          id="chemSearch"
+          class="form-control"
+          placeholder="e.g., Glyphosate or Paraquat"
+        />
+      </div>
+
+      <div class="text-center my-2"><strong>- OR -</strong></div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Option 2: Upload Product Label</label>
+        <input
+          type="file"
+          id="labelUpload"
+          class="form-control"
+          accept="image/*"
+        />
+      </div>
+
+      <button class="btn btn-success w-100" id="auditBtn">
+        Start AI Safety Audit
+      </button>
+    </div>
+  </body>
+  <script src="chemical.js"></script>
+</html>
