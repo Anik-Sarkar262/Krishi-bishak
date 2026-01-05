@@ -61,7 +61,7 @@ document.getElementById("auditBtn").addEventListener("click", async () => {
   loader.style.display = "block";
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     let result;
 
     if (fileInput) {
