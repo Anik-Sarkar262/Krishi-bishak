@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyAMIfknczme7cuqWejR6a4xFqpK2ovdjdg";
+const API_KEY = "AIzaSyCukOvYlOFrrc-kiOD30LdsWt0WutVhDlw";
 
 // DOM Elements
 const dropArea = document.getElementById("drop-area");
