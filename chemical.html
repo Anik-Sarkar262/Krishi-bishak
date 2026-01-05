@@ -43,9 +43,36 @@
       </div>
 
       <button class="btn btn-success w-100" id="auditBtn">
-        Start AI Safety Audit
+        AI Safety Analyzer
       </button>
+
+       <!-- Loading Spinner -->
+       <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Consulting the AI Doctor...</p>
+    </div>
+
+    <!-- Results Section -->
+    <div id="result" class="result-box" style="display: none;">
+        <h2>Diagnosis Report</h2>
+        <div id="aiOutput" class="markdown-body"></div>
+    </div>
+</div>
+</div>
+
+<!-- Import Map for Google Generative AI SDK -->
+<script type="importmap">
+{
+"imports": {
+  "@google/generative-ai": "https://esm.run/@google/generative-ai"
+}
+}
+</script>
+
+<!-- Link to our Logic File -->
+<script type="module" src="chemical.js"></script>
+
+
     </div>
   </body>
-  <script src="chemical.js"></script>
 </html>
