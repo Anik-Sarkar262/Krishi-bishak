@@ -6,7 +6,7 @@ document.getElementById("auditBtn").addEventListener("click", async () => {
   // Show your loader here...
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     // Dynamic prompt with language instruction
     const prompt = `
@@ -34,7 +34,7 @@ document.getElementById("auditBtn").addEventListener("click", async () => {
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = "YOUR_GEMINI_API_KEY";
+const API_KEY = "AIzaSyCukOvYlOFrrc-kiOD30LdsWt0WutVhDlw";
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Helper function to convert file to base64 for Gemini
