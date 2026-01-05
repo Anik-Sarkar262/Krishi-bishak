@@ -1,11 +1,11 @@
-const API_KEY = "AIzaSyAjC0TDf2M1fNY3CNmpbouBApDDyOQHUGg"; // <--- PASTE YOUR KEY HERE
+const API_KEY = "AIzaSyC_m8RpUh0J3Lan29jBTZlg6xPEEVjQ1-M"; 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 // SELECTORS (Make sure these IDs match your HTML file!)
-const chemicalInput = document.querySelector('input[type="text"]'); // Update specific ID if you have one, e.g., document.getElementById('chemicalName')
-const fileInput = document.querySelector('input[type="file"]');     // Update specific ID, e.g., document.getElementById('imageUpload')
-const analyzeBtn = document.querySelector('button');                // The "AI Safety Analyzer" button
-const resultDiv = document.createElement('div');                    // Creating a place to show results if you don't have one
+const chemicalInput = document.querySelector('input[type="text"]'); 
+const fileInput = document.querySelector('input[type="file"]');     
+const analyzeBtn = document.querySelector('button');              
+const resultDiv = document.createElement('div');                    
 
 // Append result div to body or a specific container
 document.body.appendChild(resultDiv); 
