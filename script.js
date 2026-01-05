@@ -135,7 +135,7 @@ function processUpload(input)
   const txt = document.getElementById("process-text");
   let width = 0;
 
-  const interval = setInterval() => 
+  const interval = setInterval() 
     if (width >= 100) {
       clearInterval(interval);
       
