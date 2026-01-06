@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyCpMlnrqVD8gvlZB57iTU8P3k14liL5ugQ";
+const API_KEY = "AIzaSyBmoYeym2pHHTrsCDUFLGk07tisptn-p2g";
 
 // DOM Elements
 const dropArea = document.getElementById("drop-area");
@@ -135,3 +135,4 @@ async function get_weather(city) {
   const data = await response.json();
   return data; // Returns temp, humidity, etc.
 }
+
