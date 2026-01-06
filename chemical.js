@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyBirCT-JxMP89PQKwp13d5T60UI-PbZoyo"; 
+const API_KEY = "AIzaSyAcYpU8kYrtQGaQK5IWJSb1iFOI5hpQ3Z0"; 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 // SELECTORS (Make sure these IDs match your HTML file!)
